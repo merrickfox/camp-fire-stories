@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://rawgit.com/aframevr/aframe/e84861d/dist/aframe-master.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script src="easyrtc/easyrtc.js"></script>
+    <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
+    <script src="server/static/js/spe.js"></script>
+    <script src="server/static/js/fire-emitter.js"></script>
+
+  </head>
+  <body>
+    <a-scene>
+
+      <a-assets>
+        <a-asset-item id="log-obj" src="./log/log.obj"></a-asset-item>
+        <a-asset-item id="log-mtl" src="./log/log.mtl"></a-asset-item>
+      </a-assets>
+
+      <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -5.025" scale="0.330 0.1 0.1 "></a-entity>
+      <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-5.137 0 -7.940" scale="0.280 0.1 0.1 " rotation="0 90 0"></a-entity>
+      <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="4.829 0 -8.440" scale="0.380 0.1 0.1 " rotation="0 -90 0"></a-entity>
+      <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-0.488 0 -14.147" scale="0.310 0.1 0.1 "></a-entity>
+      <a-entity id="fire">
+        <a-light type="point" color="#ff9807" position="-0.157 0.959 -7.716"></a-light>
+        <a-entity position="0 0 -4"
+                  fire-system="
+                color: #FF0000,#000000;
+                texture: square.png;
+                maxAge: 1;
+                maxParticleCount: 20;
+                positionSpread: 1, 1, 1;
+                accelerationValue: 0, -50, 0;
+                velocityValue: 0, 10, 0;
+      "></a-entity>
+
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -8.8" scale="0.1 0.1 0.1 "></a-entity>
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-1.150 0 -7.765" scale="0.1 0.1 0.1 " rotation="0 90 0"></a-entity>
+      </a-entity>
+
+      <a-entity geometry="primitive: plane; height: 500; width: 500"
+                position="0 -0.5 0"
+                rotation="-90 0 0"
+                material="shader: standard; roughness: 1; src: url(grass.png); repeat: 300 300"></a-entity>
+      <a-sky color="#000000"></a-sky>
+    </a-scene>
+
+    <script src="server/static/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script src="easyrtc/easyrtc.js"></script>
+    <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
+    <script src="/js/spe.js"></script>
+    <script src="/js/fire-emitter.js"></script>
+    <script src="/js/circle-spawner.js"></script>
+</head>
+<body>
+    <a-scene networked-scene="
+      app: myApp;
+      room: room1;
+      debug: true;
+      webrtc: true;
+      webrtcAudio: true;
+    ">
+        <a-assets>
+            <a-asset-item id="log-obj" src="./assets/log/log.obj"></a-asset-item>
+            <a-asset-item id="log-mtl" src="./assets/log/log.mtl"></a-asset-item>
+
+            <script id="avatar-template" type="text/html">
+                <a-entity class="avatar">
+                    <a-sphere class="head"
+                              color="#5985ff"
+                              scale="0.45 0.5 0.4"
+                    ></a-sphere>
+                    <a-entity class="face"
+                              position="0 0.05 0"
+                    >
+                        <a-sphere class="eye"
+                                  color="#efefef"
+                                  position="0.16 0.1 -0.35"
+                                  scale="0.12 0.12 0.12"
+                        >
+                            <a-sphere class="pupil"
+                                      color="#000"
+                                      position="0 0 -1"
+                                      scale="0.2 0.2 0.2"
+                            ></a-sphere>
+                        </a-sphere>
+                        <a-sphere class="eye"
+                                  color="#efefef"
+                                  position="-0.16 0.1 -0.35"
+                                  scale="0.12 0.12 0.12"
+                        >
+                            <a-sphere class="pupil"
+                                      color="#000"
+                                      position="0 0 -1"
+                                      scale="0.2 0.2 0.2"
+                            ></a-sphere>
+                        </a-sphere>
+                    </a-entity>
+                </a-entity>
+            </script>
+            <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        </a-assets>
+
+        <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" spawner="radius:4" camera position="0 1.3 0" wasd-controls look-controls></a-entity>
+
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -5.025" scale="0.330 0.1 0.1 "></a-entity>
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-5.137 0 -7.940" scale="0.280 0.1 0.1 " rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="4.829 0 -8.440" scale="0.380 0.1 0.1 " rotation="0 -90 0"></a-entity>
+        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-0.488 0 -14.147" scale="0.310 0.1 0.1 "></a-entity>
+        <a-entity id="fire">
+            <a-light type="point" color="#ff9807" position="-0.157 0.959 -7.716"></a-light>
+            <a-entity position="0 0 -4"
+                      fire-system="
+                color: #FF0000,#000000;
+                texture: ./assets/square.png;
+                maxAge: 1;
+                maxParticleCount: 20;
+                positionSpread: 1, 1, 1;
+                accelerationValue: 0, -50, 0;
+                velocityValue: 0, 10, 0;
+            "></a-entity>
+
+            <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -8.8" scale="0.1 0.1 0.1 "></a-entity>
+            <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-1.150 0 -7.765" scale="0.1 0.1 0.1 " rotation="0 90 0"></a-entity>
+        </a-entity>
+
+        <a-entity geometry="primitive: plane; height: 500; width: 500"
+                  position="0 -0.5 0"
+                  rotation="-90 0 0"
+                  material="shader: standard; roughness: 1; src: url(./assets/grass.png); repeat: 300 300"></a-entity>
+        <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+    </a-scene>
+</body>
+</html>

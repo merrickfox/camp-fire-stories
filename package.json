@@ -1,0 +1,30 @@
+{
+  "name": "camp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aframe": "git://github.com/aframevr/aframe.git#master",
+    "aframe-gif-component": "^0.2.0",
+    "aframe-gif-shader": "^0.2.0",
+    "aframe-particle-system-component": "^1.0.6",
+    "aframe-text-component": "^0.4.2",
+    "easyrtc": "^1.1.0",
+    "networked-aframe": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0",
+    "budo": "^9.4.7",
+    "imagemin-cli": "^3.0.0",
+    "node-sass": "^4.5.0",
+    "onchange": "^3.2.1",
+    "pug": "^2.0.0-beta10",
+    "pug-cli": "^1.0.0-alpha6",
+    "rimraf": "^2.5.4",
+    "uglifyjs": "^2.4.10"
+  }
+}
