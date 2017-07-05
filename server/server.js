@@ -1,5 +1,7 @@
 // Load required modules
 var http    = require("http");              // http server core module
+const https = require('https');
+const fs = require('fs');
 var express = require("express");           // web framework external module
 var serveStatic = require('serve-static');  // serve static files
 var socketIo = require("socket.io");        // web socket external module
@@ -11,12 +13,17 @@ process.title = "node-easyrtc";
 // Get port or default to 8080
 var port = process.env.PORT || 8080;
 
+
 // Setup and configure Express http server. Expect a subfolder called "static" to be the web root.
 var app = express();
 app.use(serveStatic('server/static', {'index': ['index.html']}));
 
+var httpsOptions = {
+	key: fs.readFileSync('server/key.pem'),
+	cert: fs.readFileSync('server/cert.pem')
+}
 // Start Express http server
-var webServer = http.createServer(app).listen(port);
+var webServer = https.createServer(httpsOptions, app).listen(port);
 
 // Start Socket.io so it attaches itself to Express server
 var socketServer = socketIo.listen(webServer, {"log level":1});
