@@ -14,18 +14,19 @@ process.title = "node-easyrtc";
 
 // Get port or default to 8080
 var port = process.env.PORT || 8080;
+var host = 'localhost';
 
 
 // Setup and configure Express http server. Expect a subfolder called "static" to be the web root.
 var app = express();
-app.use(serveStatic('server/static', {'index': ['index.html']}));
+app.use(express.static('static'));
 
-var httpsOptions = {
-	key: fs.readFileSync('server/key.pem'),
-	cert: fs.readFileSync('server/cert.pem')
-}
+// var httpsOptions = {
+// 	key: fs.readFileSync('server/key.pem'),
+// 	cert: fs.readFileSync('server/cert.pem')
+// }
 // Start Express http server
-var webServer = https.createServer(httpsOptions, app).listen(port);
+var webServer = http.createServer(app).listen(port, host);
 
 // Start Socket.io so it attaches itself to Express server
 var socketServer = socketIo.listen(webServer, {"log level":1});
@@ -84,6 +85,6 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 });
 
 //listen on port
-webServer.listen(port, function () {
+webServer.listen(port, host, function () {
     console.log(`https://${ip.address()}:${port}`);
 });
