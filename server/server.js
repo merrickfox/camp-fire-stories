@@ -6,6 +6,8 @@ var express = require("express");           // web framework external module
 var serveStatic = require('serve-static');  // serve static files
 var socketIo = require("socket.io");        // web socket external module
 var easyrtc = require("easyrtc");               // EasyRTC external module
+var ip = require("ip");
+
 
 // Set process name
 process.title = "node-easyrtc";
@@ -83,5 +85,5 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 
 //listen on port
 webServer.listen(port, function () {
-    console.log('listening on http://localhost:' + port);
+    console.log(`https://${ip.address()}:${port}`);
 });
