@@ -18,9 +18,10 @@
       webrtcAudio: true;
     ">
         <a-assets>
-            <a-asset-item id="log-obj" src="./assets/log/log.obj"></a-asset-item>
-            <a-asset-item id="log-mtl" src="./assets/log/log.mtl"></a-asset-item>
-
+            <img id="rollerbanner" src="assets/rollerbanner.png" />
+            <img id="floor" src="assets/floor.jpg" />
+            <img id="not_rocket" src="assets/not_rocket_science_poster-a4.png" />
+            <img id="big_data" src="assets/one_night_in_big_data_poster-a4.png" />
             <script id="avatar-template" type="text/html">
                 <a-entity class="avatar">
                     <a-sphere class="head"
@@ -55,37 +56,62 @@
                     </a-entity>
                 </a-entity>
             </script>
-            <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
         </a-assets>
 
-        <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" spawner="radius:4" camera position="0 1.3 0" wasd-controls look-controls></a-entity>
 
-        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -5.025" scale="0.330 0.1 0.1 "></a-entity>
-        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-5.137 0 -7.940" scale="0.280 0.1 0.1 " rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="4.829 0 -8.440" scale="0.380 0.1 0.1 " rotation="0 -90 0"></a-entity>
-        <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-0.488 0 -14.147" scale="0.310 0.1 0.1 "></a-entity>
-        <a-entity id="fire">
-            <a-light type="point" color="#ff9807" position="-0.157 0.959 -7.716"></a-light>
-            <a-entity position="0 0 -4"
-                      fire-system="
-                color: #FF0000,#000000;
-                texture: ./assets/square.png;
-                maxAge: 1;
-                maxParticleCount: 20;
-                positionSpread: 1, 1, 1;
-                accelerationValue: 0, -50, 0;
-                velocityValue: 0, 10, 0;
-            "></a-entity>
-            <a-sound src="src: url(./assets/ambient.wav)" autoplay="true" loop="true" position="0 0 -8.8" volume="1.5"></a-sound>
-            <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="0 0 -8.8" scale="0.1 0.1 0.1 "></a-entity>
-            <a-entity obj-model="obj: #log-obj; mtl: #log-mtl" position="-1.150 0 -7.765" scale="0.1 0.1 0.1 " rotation="0 90 0"></a-entity>
+
+        <a-entity jid="gallery" position="0 0 0">
+            <a-box width="15" height="3" depth="0.06" position="-7.5 1.5 0" rotation="0 -90 0" color="ivory"></a-box>
+            <a-box width="15" height="3" depth="0.06" position="0 1.5 -7.5" rotation="0 -180 0" color="ivory"></a-box>
+            <a-box width="15" height="3" depth="0.06" position="7.5 1.5 0" rotation="0 -90 0" color="ivory"></a-box>
+            <a-box width="15" height="3" depth="0.06" position="0 1.5 7.5" rotation="0 -180 0" color="ivory"></a-box>
+
+            <a-plane width="15" height="15" material="src: #floor; repeat: 75 75;roughness: 1;" position="0 0 0" rotation="-90 0 0"></a-plane>
+
+            <!-- A4 poster -->
+            <a-entity position="-1 1.2 -7.43">
+                <a-box width="0.015" height="0.297" depth="0.01" position="-0.1125 0 0" color="#222"></a-box>
+                <a-box width="0.015" height="0.297" depth="0.01" position="0.1125 0 0" color="#222"></a-box>
+                <a-box width="0.24" height="0.015" depth="0.01" position="0 -0.156 0" color="#222"></a-box>
+                <a-box width="0.24" height="0.015" depth="0.01" position="0 0.156 0" color="#222"></a-box>
+                <!--image -->
+                <a-box width="0.21" height="0.297" depth="0.01" material="src: #not_rocket;" position="0 0 -0.01" rotation="0 0 0"></a-box>
+            </a-entity>
+
+
+            <!-- A4 poster -->
+            <a-entity position="-7.43 1.2 -1" rotation="0 90 0">
+                <a-box width="0.015" height="0.297" depth="0.01" position="-0.1125 0 0" color="#222"></a-box>
+                <a-box width="0.015" height="0.297" depth="0.01" position="0.1125 0 0" color="#222"></a-box>
+                <a-box width="0.24" height="0.015" depth="0.01" position="0 -0.156 0" color="#222"></a-box>
+                <a-box width="0.24" height="0.015" depth="0.01" position="0 0.156 0" color="#222"></a-box>
+                <!--image -->
+                <a-box width="0.21" height="0.297" depth="0.01" material="src: #big_data;" position="0 0 -0.01" rotation="0 0 0"></a-box>
+            </a-entity>
+
+            <!-- rollerbanner-->
+            <a-entity position="6 0 -6" rotation="0 -45 0">
+                <a-box width="0.92" height="0.08" depth="0.15" color="#999" position="0 0 0" ></a-box>
+                <a-cylinder color="#999" height="2.05" radius="0.005" position="0 1.025 -0.04"></a-cylinder>
+
+                <a-box src="#rollerbanner" geometry="height: 2.05; width: 0.85; depth: 0.01;" position="0 1.025 0" rotation="-2 0 0"></a-box>
+            </a-entity>
+
+
+
+
+
+
+
+            <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" spawner="radius:4" camera position="0 1.8 0" wasd-controls look-controls></a-entity>
+
+
+
+
         </a-entity>
 
-        <a-entity geometry="primitive: plane; height: 500; width: 500"
-                  position="0 -0.5 0"
-                  rotation="-90 0 0"
-                  material="shader: standard; roughness: 1; src: url(./assets/grass.png); repeat: 300 300"></a-entity>
-        <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+
+        <a-sky color="skyblue" rotation="0 -90 0"></a-sky>
     </a-scene>
 </body>
 </html>
