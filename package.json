@@ -12,6 +12,7 @@
     "aframe-particle-system-component": "^1.0.6",
     "aframe-text-component": "^0.4.2",
     "easyrtc": "^1.1.0",
+    "ip": "^1.1.5",
     "networked-aframe": "^0.2.0"
   },
   "devDependencies": {
