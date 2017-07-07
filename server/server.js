@@ -13,7 +13,7 @@ var ip = require("ip");
 process.title = "node-easyrtc";
 
 // Get port or default to 8080
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 var host = 'localhost';
 
 
