@@ -1,12 +1,12 @@
 AFRAME.registerComponent('spawner', {
 	schema: {
-		radius: {type: 'number', default: 1},
+		radius: {type: 'number', default: 1}
 	},
 
 	init: function() {
 		var el = this.el;
 		var playerHeight = 1.3;
-		var center = new THREE.Vector3(0, 0, 0);
+		var center = new THREE.Vector3(0, 0, -8.8);
 
 		var angleRad = this.getRandomAngleInRadians();
 		var circlePoint = this.randomPointOnCircle(this.data.radius, angleRad);
